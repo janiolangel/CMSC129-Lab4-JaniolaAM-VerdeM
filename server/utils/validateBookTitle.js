@@ -1,13 +1,10 @@
 function validateBookTitle(title) {
-    if (!title.trim()) {
-        return false
-    }
+
+    const trimmedTitle = title.trim()
+    const isEmpty = trimmedTitle.length === 0
+    const exceedsMaxLength = trimmedTitle.length > 500
     
-    if (title.length > 500) {
-        return false
-    }
-    
-    return true
+    return !isEmpty && !exceedsMaxLength
 }
 
 module.exports = validateBookTitle
