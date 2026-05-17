@@ -146,6 +146,11 @@ npm run dev
 
 ---
 
+- create a new book (POST /books)
+
+![create operation](images/create.png)
+
+
 ## System Tests
 
 ---
