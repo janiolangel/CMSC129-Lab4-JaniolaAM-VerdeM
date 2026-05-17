@@ -32,7 +32,7 @@ jobs:
         run: npm run test:integration
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+        run: npx --no-install playwright install --with-deps chromium
 
       - name: Run system tests
-        run: npx playwright test
+        run: npx --no-install playwright test

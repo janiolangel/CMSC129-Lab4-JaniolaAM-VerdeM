@@ -8,12 +8,14 @@ module.exports = {
     {
       command: 'cd server && node server.js',
       port: 5000,
-      reuseExistingServer: true,
+      timeout: 30000,
+      reuseExistingServer: !process.env.CI,
     },
     {
-      command: 'cd client && npm run dev',
+      command: 'cd client && npm run dev -- --host',
       port: 5173,
-      reuseExistingServer: true,
+      timeout: 60000,
+      reuseExistingServer: !process.env.CI,
     },
   ],
 };
