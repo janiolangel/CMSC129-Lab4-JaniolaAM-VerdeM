@@ -129,6 +129,9 @@ npm run dev
 
 ## Unit Tests
 
+- validate book title
+
+![book title validation](images/booktitle.png)
 
 ---
 
