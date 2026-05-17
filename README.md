@@ -4,7 +4,7 @@
 
 
 ## Members
-- Angel Mae Janiola
+- Angel May Janiola
 - Myra Verde
 
 ### Deployment Link
