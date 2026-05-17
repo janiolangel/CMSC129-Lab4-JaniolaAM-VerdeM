@@ -22,7 +22,7 @@ This is an application that allows users to manage their books using CRUD. With 
 
 1. As a reader, I want to add books to my reading list so that I can track what I am reading.
 
-2. As a reader, I want to update a book’s reading status so that I can monitor my reading progress.
+2. As a reader, I want to update a book's reading status so that I can monitor my reading progress.
 
 3. As a reader, I want to remove books that I do not want from my reading list so that I can keep my list organize.
 ---
@@ -67,7 +67,7 @@ This is an application that allows users to manage their books using CRUD. With 
 ## System / E2E Testing
 
 - add a new book
-- update a book’s reading status
+- update a book's reading status
 - delete a book from the list
 
 ---
@@ -121,7 +121,20 @@ npm run dev
 
 ## Run Tests
 
----
+### Unit Tests
+```bash
+npm run test:unit
+```
+
+### Integration Tests
+```bash
+npm run test:integration
+```
+
+### System Tests
+```bash
+npx playwright test
+```
 
 ---
 
@@ -161,6 +174,44 @@ npm run dev
 
 ## System Tests
 
+![system tests passing](images/system-tests.png)
+
+---
+
+## Reflection
+
+Writing tests before code was challenging at first because we were used to
+building features first and testing them after. The most difficult part was
+writing tests for code that did not exist yet — it felt unnatural to assert
+behavior on something with no implementation.
+
+The most frustrating challenge we encountered was configuring Playwright to
+run in CI. The tests passed perfectly on our local machine but kept failing
+in GitHub Actions. It tested our patience pushing fix after fix, but it taught
+us something important: a test that only works locally is not a real test.
+Getting it to finally pass on CI felt very rewarding.
+
+Writing tests first did change how we designed our code. Because we had to
+think about what a function should return before writing it, we ended up with
+cleaner, more focused functions. Our validation functions became pure and simple
+because the tests demanded clear inputs and outputs. The tests also gave us
+confidence when refactoring — we could restructure code without worrying about
+breaking behavior since the tests would catch it immediately.
+
 ---
 
 # CI/CD Setup
+
+## Tool Used
+GitHub Actions
+
+## Trigger
+Tests run automatically on every push to `main`.
+
+## Pipeline Screenshots
+
+### Failing pipeline run (Red phase)
+[to insert screenshot]
+
+### Passing pipeline run (Green phase)
+[to insert screenshot]
