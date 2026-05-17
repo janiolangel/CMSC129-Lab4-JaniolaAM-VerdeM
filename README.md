@@ -174,7 +174,7 @@ npx playwright test
 
 ## System Tests
 
-![system tests passing](images/system-tests.png)
+![system tests passing](images/systemtests.png)
 
 ---
 
