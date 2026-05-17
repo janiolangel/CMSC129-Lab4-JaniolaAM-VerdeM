@@ -1,3 +1,4 @@
+// Converts a string to title case by trimming whitespace and capitalizing each word
 function toTitleCase(str) {
   return str
     .trim()
