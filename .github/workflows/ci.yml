@@ -36,3 +36,9 @@ jobs:
 
       - name: Run system tests
         run: node_modules/@playwright/test/cli.js test
+      
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run system tests
+        run: npx playwright test
