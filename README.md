@@ -9,7 +9,7 @@
 
 ### Deployment Link
 - Frontend: https://cmsc129-lab4-frontend.onrender.com
-- Backend: https://cmsc129-lab4-janiolaam-verdem.onrender.com
+- Backend: https://cmsc129-lab4-janiolaam-verdem-1.onrender.com
 
 
 ## App Description
@@ -206,12 +206,12 @@ breaking behavior since the tests would catch it immediately.
 GitHub Actions
 
 ## Trigger
-Tests run automatically on every push to `main`.
+Tests run automatically on every push to `main`. Deployment only proceeds if all tests pass.
 
 ## Pipeline Screenshots
 
 ### Failing pipeline run (Red phase)
-[to insert screenshot]
+![failing CI](images/cifail.png)
 
 ### Passing pipeline run (Green phase)
-[to insert screenshot]
+![passing CI](images/cipass.png)
