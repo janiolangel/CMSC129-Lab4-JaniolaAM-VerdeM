@@ -40,4 +40,20 @@ describe("POST /books", () => {
         expect(response.statusCode).toBe(400)
         expect(response.body.error).toBe("Invalid reading status")
     })
+
+    test("GET /books returns all books", async () => {
+        await request(app).post("/books")
+        .send({
+            title: "Spinning Silver",
+            author: "Naomi Novik",
+            readingStatus: "To Read",
+            year: 2018
+        })
+
+        const response = await request(app).get("/books")
+        expect(response.statusCode).toBe(200)
+        expect(Array.isArray(response.body)).toBe(true)
+        expect(response.body.length).toBeGreaterThan(0)
+        expect(response.body[0].title).toBe("Spinning Silver")
+    })
 })
