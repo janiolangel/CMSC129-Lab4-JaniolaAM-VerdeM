@@ -8,8 +8,8 @@
 - Myra Verde
 
 ### Deployment Link
-- [to insert]
-
+- Frontend: https://cmsc129-lab4-frontend.onrender.com
+- Backend: https://cmsc129-lab4-janiolaam-verdem.onrender.com
 
 
 ## App Description
