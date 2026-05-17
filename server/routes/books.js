@@ -1,4 +1,5 @@
 const express = require("express")
+const books = require("../data/books")
 
 const router = express.Router()
 const createBook = require("../services/createBook")
@@ -10,6 +11,10 @@ router.post("/", (req, res) => {
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
+})
+
+router.get("/", (req, res) => {
+    res.status(200).json(books)
 })
 
 module.exports = router
