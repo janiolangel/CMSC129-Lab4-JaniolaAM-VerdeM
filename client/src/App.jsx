@@ -1,121 +1,109 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+
+const API = 'http://localhost:5000'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [books, setBooks] = useState([])
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [year, setYear] = useState('')
+  const [status, setStatus] = useState('To Read')
+
+  const addBook = async () => {
+    const res = await fetch(`${API}/books`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, author, year, readingStatus: status })
+    })
+    const book = await res.json()
+    setBooks([...books, { ...book, newStatus: book.readingStatus }])
+    setTitle('')
+    setAuthor('')
+    setYear('')
+    setStatus('To Read')
+  }
+
+  const updateBook = async (id, newStatus) => {
+    const res = await fetch(`${API}/books/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ readingStatus: newStatus })
+    })
+    const updated = await res.json()
+    setBooks(books.map(b => b.id === id ? { ...updated, newStatus: updated.readingStatus } : b))
+  }
+
+  const deleteBook = async (id) => {
+    await fetch(`${API}/books/${id}`, { method: 'DELETE' })
+    setBooks(books.filter(b => b.id !== id))
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+    <div>
+      <h1>Reading List</h1>
+
+      <div>
+        <input
+          data-testid="book-title-input"
+          placeholder="Title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
+        <input
+          data-testid="book-author-input"
+          placeholder="Author"
+          value={author}
+          onChange={e => setAuthor(e.target.value)}
+        />
+        <input
+          data-testid="book-year-input"
+          placeholder="Year"
+          value={year}
+          onChange={e => setYear(e.target.value)}
+        />
+        <select
+          data-testid="book-status-select"
+          value={status}
+          onChange={e => setStatus(e.target.value)}
         >
-          Count is {count}
+          <option>To Read</option>
+          <option>Reading</option>
+          <option>Done</option>
+        </select>
+        <button data-testid="add-book-btn" onClick={addBook}>
+          Add Book
         </button>
-      </section>
+      </div>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      <ul data-testid="book-list">
+        {books.map(book => (
+          <li key={book.id}>
+            <span>{book.title} — {book.author} — {book.readingStatus}</span>
+            <select
+              data-testid="update-status-select"
+              value={book.newStatus}
+              onChange={e => setBooks(books.map(b => b.id === book.id ? { ...b, newStatus: e.target.value } : b))}
+            >
+              <option>To Read</option>
+              <option>Reading</option>
+              <option>Done</option>
+            </select>
+            <button
+              data-testid="update-book-btn"
+              onClick={() => updateBook(book.id, book.newStatus)}
+            >
+              Update
+            </button>
+            <button
+              data-testid="delete-book-btn"
+              onClick={() => deleteBook(book.id)}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
