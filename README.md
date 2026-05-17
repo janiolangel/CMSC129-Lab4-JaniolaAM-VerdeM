@@ -133,6 +133,9 @@ npm run dev
 
 ![book title validation](images/booktitle.png)
 
+- validate reading status
+
+![reading status validation](images/readingstatus.png)
 ---
 
 ## Integration Tests
