@@ -150,6 +150,9 @@ npm run dev
 
 ![create operation](images/create.png)
 
+- retrieve books (GET /books)
+![read operation](images/read.png)
+
 
 ## System Tests
 
