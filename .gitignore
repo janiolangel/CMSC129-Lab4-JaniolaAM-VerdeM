@@ -1,0 +1,35 @@
+# dependencies
+node_modules/
+
+# logs
+logs
+*.log
+npm-debug.log*
+
+# environment variables
+.env
+
+# build folders
+dist/
+build/
+
+# coverage reports
+coverage/
+
+# Playwright
+playwright-report/
+test-results/
+
+# Vite
+.vite/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# package lock files
+# package-lock.json
