@@ -42,3 +42,15 @@ jobs:
 
       - name: Run system tests
         run: npx playwright test
+
+deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+      - name: Deploy backend to Render
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
+
+      - name: Deploy frontend to Render
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_FRONTEND }}
