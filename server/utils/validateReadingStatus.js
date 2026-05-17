@@ -1,7 +1,12 @@
 function validateReadingStatus(status) {
-    const validStatuses = ["To Read", "Currently Reading", "Completed", "Dropped"]
+    const VALID_STATUSES = new Set([
+        "To Read",
+        "Currently Reading",
+        "Completed",
+        "Dropped"
+    ])
     
-    return validStatuses.includes(status)
+    return VALID_STATUSES.has(status)
 }
 
 module.exports = validateReadingStatus
