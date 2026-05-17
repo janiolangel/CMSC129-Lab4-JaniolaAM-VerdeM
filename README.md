@@ -52,7 +52,7 @@ This is an application that allows users to manage their books using CRUD. With 
 
 - validate book titles
 - validate allowed reading statuses
-- formatt book data
+- format book data
 
 ---
 
@@ -151,7 +151,12 @@ npm run dev
 ![create operation](images/create.png)
 
 - retrieve books (GET /books)
+
 ![read operation](images/read.png)
+
+- update (PUT /books/:id) and delete a book (DELETE /books/:id)
+
+![update and delete](images/updateanddelete.png)
 
 
 ## System Tests
