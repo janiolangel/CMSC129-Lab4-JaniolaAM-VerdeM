@@ -1,15 +1,16 @@
+
 const books = require("../data/books")
 const validateBookData = require("../utils/validateBookData")
 
 function updateBook(id, updates) {
-  const book = books.find(b => b.id === Number(id))
-  if (!book) throw new Error("Book not found")
+  const index = books.findIndex(b => b.id === Number(id))
+  if (index === -1) throw new Error("Book not found")
 
-  const updatedBook = { ...book, ...updates }
+  const updatedBook = { ...books[index], ...updates }
   validateBookData(updatedBook)
 
-  Object.assign(book, updatedBook)
-  return book
+  books[index] = updatedBook
+  return updatedBook
 }
 
 module.exports = updateBook
