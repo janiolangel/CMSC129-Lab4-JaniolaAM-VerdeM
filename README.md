@@ -136,6 +136,10 @@ npm run dev
 - validate reading status
 
 ![reading status validation](images/readingstatus.png)
+
+- format book data
+
+![all unit tests passing](images/unittests.png)
 ---
 
 ## Integration Tests
